@@ -1,16 +1,19 @@
 <template>
   <h1>{{ title }}</h1>
-  <modal />
+  <Modal :header="header" :text="text"/>
 </template>
 
 <script>
-import modal from './components/modal.vue'
+import Modal from './components/Modal.vue'
+
 export default {
   name: 'App',
-  components: { modal },
+  components: { Modal },
   data() {
     return {
-      title: 'My first vue App:)'
+      title: 'My first vue App:)', 
+      header: 'Sign me up', 
+      text: 'naggayi DAPHNE'
     }
   }, 
   methods: {
