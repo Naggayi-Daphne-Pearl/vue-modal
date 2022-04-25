@@ -1,9 +1,11 @@
 <template>
-  <form>
+  <form @submit.prevent="handleSubmit">
+      <h1>REGISTRATION FORM</h1>
       <label> Email</label>
       <input type="email" required v-model="email">
        <label> Password</label>
       <input type="password" required v-model="password">
+      <div v-if="passwordError" class="error" {{ passwordError }}></div>
 
       <label>Role:</label>
       <select v-model="role">
@@ -15,9 +17,7 @@
       <input type="text" v-model="tempSkill" @keyup.alt="addSkill">
       <div v-for="skill in skills" :key="skill" class="pill">
         <span @click="deleteSkill(skill)">{{ skill }}</span>
-
       </div>
-
 
        <div>
           <input type="checkbox" value="surname" v-model="names">
@@ -35,8 +35,10 @@
           <input type="checkbox" required v-model="terms">
           <label>Accept terms and conditions</label>
       </div>
-     
-  </form>
+      <div class="submit">
+          <button>Create an account</button>
+      </div>
+   </form>
   <p>Email: {{ email }}</p>
   <p>Password: {{ password }}</p>
   <p>Role: {{ role }}</p>
@@ -56,12 +58,14 @@ export default {
             terms: false, 
             names: [], 
             tempSkill: '', 
-            skills: []
+            skills: [], 
+            passwordError: ''
 
 
         }
     }, 
     methods: {
+        // adding an item
         addSkill(e) {
            //console.log(e); 
            if (e.key === ',' && this.tempSkill) {
@@ -77,6 +81,16 @@ export default {
             this.skills = this.skills.filter((item) => {
                 return skill != item
             })
+        }, 
+        handleSubmit () {
+            // VALIDATING PASSOWRD
+            this.passwordError = this.password.length > 5 ? 
+             '' : 'password must be at least 6 characters long'
+             if (this.passwordError) {
+                console.log('email', this.email);
+                console.log('password', this.password);
+             }
+
         }
     }
 
@@ -125,5 +139,22 @@ export default {
         font-weight: bold;
         color: #777;
         cursor: pointer;
+    }
+    button {
+        background: blue;
+        border: 0;
+        padding: 10px 20px;
+        margin-top: 20px;
+        color: white;
+        border: 20px;   
+    }
+    .submit {
+        text-align: center;
+    }
+    .error {
+        color: red;
+        font-size: 0.8rem;
+        font-weight: bold;
+
     }
 </style>
