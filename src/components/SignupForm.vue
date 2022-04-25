@@ -10,11 +10,16 @@
           <option value="developer">Web developer</option>
           <option value="designer">Web designer</option>
       </select>
-      <div class="terms">
-          <input type="checkbox" required v-model="terms">
-          <label>Accept terms and conditions</label>
+
+      <label> Skills</label>
+      <input type="text" v-model="tempSkill" @keyup.alt="addSkill">
+      <div v-for="skill in skills" :key="skill" class="pill">
+          {{ skill }}
+
       </div>
-      <div>
+
+
+       <div>
           <input type="checkbox" value="surname" v-model="names">
           <label>Naggayi</label>
       </div>
@@ -26,6 +31,11 @@
           <input type="checkbox" value="daphne" v-model="names">
           <label>Daphne</label>
       </div>
+      <div class="terms">
+          <input type="checkbox" required v-model="terms">
+          <label>Accept terms and conditions</label>
+      </div>
+     
   </form>
   <p>Email: {{ email }}</p>
   <p>Password: {{ password }}</p>
@@ -44,8 +54,23 @@ export default {
             password: '', 
             role: '', 
             terms: false, 
-            names: []
+            names: [], 
+            tempSkill: '', 
+            skills: []
 
+
+        }
+    }, 
+    methods: {
+        addSkill(e) {
+           //console.log(e); 
+           if (e.key === ',' && this.tempSkill) {
+               // this makes sure the skill selected is not duplicated
+               if (!this.skills.includes(this.tempSkill)) {
+                   this.skills.push(this.tempSkill) 
+               }
+              this.tempSkill = ''
+           }
         }
     }
 
