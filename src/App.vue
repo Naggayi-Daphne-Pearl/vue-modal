@@ -1,43 +1,18 @@
 <template>
-  <h1>{{ title }}</h1>
-  <p>Welcome ...</p>
-  <div v-if="showModal">
-    <Modal :header="header" :text="text" theme="sale" @close="toggleModal"/>
-  </div>
-  <button @click="toggleModal">Open Modal</button>
+  <SignupForm />
 </template>
 
 <script>
-import Modal from './components/Modal.vue'
-
+import SignupForm from './components/SignupForm.vue'
 export default {
-  name: 'App',
-  components: { Modal },
-  data() {
-    return {
-      title: 'My first vue App:)', 
-      header: 'Sign up for a giveup', 
-      text: 'Buy one get one free', 
-      showModal: false
-    }
-  }, 
-  methods: {
-    // handling click events
-    // handleClick() {
-    //   console.log(this.$refs.name)
-    //   this.$refs.name.classList.add('active')
-    //   this.$refs.name.focus(),    
-    // },
-    // custom events
-    toggleModal() {
-      this.showModal = !this.showModal
-    }
-  }
+  name: 'App', 
+  components: { SignupForm}
+
 }
 </script>
 
 <style>
-#app {
+  #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -45,10 +20,8 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-h1 {
-  border-bottom: 1px solid #ddd ;
-  display: inline-block;
-  padding: 10px;
-  text-transform: capitalize;
+body {
+  margin: 0;
+  background: #eeee;
 }
 </style>
