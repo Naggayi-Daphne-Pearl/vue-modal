@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <h1>Home page</h1>
-    <p ref="p">My name is {{ name }}. I am {{ age }}</p>
+    <p>My name is {{ name }}. I am {{ age }}</p>
     <button @click="handleClick">Click me</button>
+    <button @click="age++">ADD AGE</button>
     
-
   </div>
 </template>
 
@@ -14,26 +14,22 @@ import { ref } from 'vue'
 export default {
   name: 'home',
   setup() {
-    const p = ref(null)
+    //const p = ref(null)
 
-    let name = 'daphne'
-    let age = 24
+    // when we use ref to surround a value it becomes reactive
+    const name = ref('daphne')
+    const age = ref(24)
+
     
-    const handleClick = () => {
-      console.log(p, p.value)
-      p.value.textContent ='learning vue'
+    const handleClick = () => { 
+      name.value = 'pearl'
+      age.value = 25
+     
     }
 
-    return{name: name, age:age, handleClick, p}
+    return{name: name, age:age, handleClick}
 
-  }, 
-  created() {
-    console.log('created')
-
-  }, 
-  mounted() {
-    console.log('mounted')
-
-  }
+  } 
+ 
 }
 </script>
