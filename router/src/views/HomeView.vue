@@ -1,33 +1,28 @@
 <template>
   <div class="home">
-    <h1>Home page</h1>
-    <p>My name is {{ name }}. I am {{ age }}</p>
-    <button @click="handleClick">Click me</button>
-    <button @click="age++">ADD AGE</button>
+    <h1>Home</h1>
+    <h3>Computations</h3>
+    <input type="text" v-model="search">
+    <p>search here - {{ search }}</p>
+    <div v-for="name in matchingNames" :key="name">{{ name }}</div>
+   
     
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 export default {
   name: 'home',
   setup() {
-    //const p = ref(null)
+    const search = ref('')
+    const names = ref(['daphne', 'naggayi', 'pearl']); 
+    const matchingNames = computed(()=> {
+      return names.value.filter((name) => name.includes(search.value))
+    })
 
-    // when we use ref to surround a value it becomes reactive
-    const name = ref('daphne')
-    const age = ref(24)
-
-    
-    const handleClick = () => { 
-      name.value = 'pearl'
-      age.value = 25
-     
-    }
-
-    return{name: name, age:age, handleClick}
+    return { names, search, matchingNames }
 
   } 
  
