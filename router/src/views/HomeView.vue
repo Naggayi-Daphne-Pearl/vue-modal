@@ -11,13 +11,16 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
 
 export default {
   name: 'home',
   setup() {
     const search = ref('')
     const names = ref(['daphne', 'naggayi', 'pearl']); 
+    watch(search, () => {
+      console.log('watch function run')
+    })
     const matchingNames = computed(()=> {
       return names.value.filter((name) => name.includes(search.value))
     })
